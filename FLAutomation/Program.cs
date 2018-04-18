@@ -8,9 +8,20 @@ namespace FLAutomation
         {
             AutomationBase ab = new AutomationBase();
             ab.TestInitialize();
-            AddApprovalGroups apg = new AddApprovalGroups();
-            apg.InsertApprover();
-            Thread.Sleep(1000);
+            ExcelReader excelReader = new ExcelReader(@"C:\Users\kzd\Desktop\ExcelExample.xlsx");
+            try
+            {
+                for (int i = 1; i <= excelReader.RowCount; i++)
+                {
+                    string _code = excelReader.GetCellContent(i, 1);
+                    string _desc = excelReader.GetCellContent(i, 2);
+                    AddApprovalGroups.InsertApprover(_code, _desc);
+                }
+            }
+            finally
+            {
+                excelReader = null;
+            }
             ab.TestCleanup();
         }
     }
