@@ -15,6 +15,7 @@ namespace FLAutomation
                 {
                     string _code = excelReader.GetCellContent(i, 1);
                     string _desc = excelReader.GetCellContent(i, 2);
+                    Thread.Sleep(200);
                     AddApprovalGroups.InsertApprover(_code, _desc);
                 }
             }
